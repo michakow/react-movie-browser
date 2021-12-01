@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { apiKey } from "./apiKey.js"
 
-export const useMoviesData = (query, page) => {
+export const useMoviesData = (query, page, trend) => {
   const [movies, setMovies] = useState({
     state: 'loading'
   })
@@ -13,7 +13,8 @@ export const useMoviesData = (query, page) => {
 
     const fetchData = async () => {
       try{
-        const path = query ? 
+        const path = trend ? `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`
+        : query ? 
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&page=${page}` 
         : 
         `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
@@ -39,7 +40,7 @@ export const useMoviesData = (query, page) => {
     }
 
     setTimeout(fetchData, 1000)
-  }, [query, page])
+  }, [page, query, trend])
 
   return movies
 }

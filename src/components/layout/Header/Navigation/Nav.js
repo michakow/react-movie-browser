@@ -10,13 +10,13 @@ const Nav = () => {
     },
     {
       id: 2,
-      name: 'opinions',
-      pathName: '/opinions'
+      name: 'top10',
+      pathName: '/trending'
     },
     {
       id: 3,
-      name: 'download',
-      pathName: '/download'
+      name: 'opinions',
+      pathName: '/opinions'
     }
   ]
 

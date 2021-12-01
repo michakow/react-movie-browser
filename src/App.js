@@ -11,7 +11,10 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path='/movies'>
-            <MovieListPage />
+            <MovieListPage trend={false} />
+          </Route>
+          <Route path='/trending'>
+            <MovieListPage trend={true} />
           </Route>
           <Route exact path='/'>
             <Redirect to='/movies' />

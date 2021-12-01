@@ -9,7 +9,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <BrowserRouter>
+      <BrowserRouter basename='/react-movie-browser'>
         <Switch>
           <Route path='/movies'>
             <MovieListPage trend={false} />

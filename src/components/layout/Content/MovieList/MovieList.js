@@ -11,7 +11,7 @@ const MovieList = ({ trend }) => {
   const movies = useMoviesData(query, page, trend)
   useEffect(() => {
     setPage(1)
-  }, [query])
+  }, [query, trend])
 
   return (
     <StyledContent>

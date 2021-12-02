@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "./theme/GlobalStyle.js"
 import { theme } from "./theme/theme.js"
@@ -9,7 +9,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <BrowserRouter basename='/react-movie-browser'>
+      <HashRouter>
         <Switch>
           <Route path='/movies'>
             <MovieListPage trend={false} />
@@ -27,7 +27,7 @@ function App() {
             <Redirect to='/movies' />
           </Route> */}
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   );
 }

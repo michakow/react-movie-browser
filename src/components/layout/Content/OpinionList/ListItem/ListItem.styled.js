@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components"
+import { ImBin } from "react-icons/im"
 
 export const StyledWrapper = styled.div`
+  position: relative;
   width: 99%;
   margin-bottom: 15px;
   padding: 10px 15px;
@@ -26,4 +28,12 @@ export const StyledSpan = styled.span`
   font-size: 12px;
   font-weight: normal;
   color: #585874;
+`
+
+export const StyledDeleteButton = styled(ImBin)`
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #b60000;
+  cursor: pointer;
 `

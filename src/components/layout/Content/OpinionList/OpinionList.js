@@ -5,7 +5,18 @@ import { StyledContent, StyledHeading, StyledList, StyledLine} from "./OpinionLi
 
 const OpinionList = () => {
   const opinions = useOpinionsData()
-  console.log(opinions)
+
+  const deleteOpinion = (id, txt, author) => {
+    fetch(`http://127.0.0.1:8888/opinions/${id}`, {
+      method: "DELETE"
+    })
+    const deleteInfo = `${author}'s opinion has been deleted.\nOpinion: ${txt}`
+    console.log(deleteInfo)
+
+    setTimeout(() => {
+      window.location.reload(true)
+    }, 2000)
+  }
 
   return (
     <StyledContent> 
@@ -23,11 +34,11 @@ const OpinionList = () => {
       {
         opinions.state === 'loading' || opinions.state === 'error' ? (
           null
-        ) : (
+        ) : opinions.opinions.length === 0 ? <StyledHeading>No opinions yet</StyledHeading> : (
           <StyledList>
             {
-              opinions.opinions.map((opinion, index) => (
-                <ListItem key={index} opinion={opinion} />
+              opinions.opinions.slice(0).reverse().map(opinion => (
+                <ListItem key={opinion.id} opinion={opinion} onDeleteOpinion={deleteOpinion} />
               ))
             }
           </StyledList>

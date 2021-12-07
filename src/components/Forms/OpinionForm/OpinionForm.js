@@ -1,5 +1,6 @@
+import uuid from "react-uuid"
 import { useState } from "react"
-import { StyledForm, StyledLabel, StyledTextarea, StyledInput, StyledButton, StyledInfo } from "./OpinionForm.styled"
+import { StyledForm, StyledLabel, StyledTextarea, StyledInput, StyledButton, StyledSendInfo, StyledSignatureInfo, StyledSpan } from "./OpinionForm.styled"
 
 const OpinionForm = ({serverState}) => {
   const [sendingState, setSendingState] = useState(false)
@@ -21,6 +22,7 @@ const OpinionForm = ({serverState}) => {
     const date = new Date().toISOString().split("T")[0];
 
     sendOpinionToServer({
+      id: uuid(),
       text: opinion,
       date: date,
       author: author
@@ -46,9 +48,9 @@ const OpinionForm = ({serverState}) => {
     <StyledForm onSubmit={onFormSubmit}>
       {
         sendingState ? 
-        <StyledInfo sendState={serverState === "success"}>
+        <StyledSendInfo sendState={serverState === "success"}>
           {serverState === "success" ? "Opinion has been sent" : "Opinion has not been sent (server problem)"}
-        </StyledInfo> : null
+        </StyledSendInfo> : null
       }
       <StyledLabel opinion>
         <StyledTextarea
@@ -61,12 +63,13 @@ const OpinionForm = ({serverState}) => {
       <StyledLabel author>
         <StyledInput
           type="email"
-          placeholder="your email.."
+          placeholder="*your email.."
           required={true}
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
       </StyledLabel>
+      <StyledSignatureInfo><StyledSpan>*</StyledSpan>Your email address will act as a signature for your opinion.</StyledSignatureInfo>
       <StyledButton type="submit" value="Send opinion" />
     </StyledForm>
   )

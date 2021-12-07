@@ -45,7 +45,7 @@ export const StyledButton = styled.input`
   }
 `
 
-export const StyledInfo = styled.p`
+export const StyledSendInfo = styled.p`
   position: absolute;
   width: 60%;
   top: -22px;
@@ -63,4 +63,14 @@ export const StyledInfo = styled.p`
   ${(props) => props.sendState && css`
     background-color: #afedc4;
   `} 
+`
+
+export const StyledSignatureInfo = styled.p`
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`
+
+export const StyledSpan = styled.span`
+  font-weight: bold;
 `

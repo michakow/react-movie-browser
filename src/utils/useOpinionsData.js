@@ -5,7 +5,6 @@ export const useOpinionsData = () => {
   const [opinions, setOpinions] = useState({
     state: 'loading'
   })
-  console.log(serverURL)
 
   useEffect(() => {
     setOpinions({

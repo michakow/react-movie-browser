@@ -6,7 +6,6 @@ import { StyledContent, StyledHeading, StyledList, StyledLine} from "./OpinionLi
 
 const OpinionList = () => {
   const opinions = useOpinionsData()
-  console.log(process.env.NODE_ENV)
 
   const deleteOpinion = (id, txt, author) => {
     fetch(`${serverURL}/opinions/${id}`, {

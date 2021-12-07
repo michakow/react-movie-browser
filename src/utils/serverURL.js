@@ -1,1 +1,1 @@
-export const serverURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8888' : 'https://react-movie-browser-backend.herokuapp.com'
+export const serverURL = process.env.NODE_ENV ? 'http://localhost:8888' : 'https://react-movie-browser-backend.herokuapp.com'

@@ -1,5 +1,6 @@
 import uuid from "react-uuid"
 import { useState } from "react"
+import { serverURL } from "../../../utils/serverURL"
 import { StyledForm, StyledLabel, StyledTextarea, StyledInput, StyledButton, StyledSendInfo, StyledSignatureInfo, StyledSpan } from "./OpinionForm.styled"
 
 const OpinionForm = ({serverState}) => {
@@ -8,7 +9,7 @@ const OpinionForm = ({serverState}) => {
   const [author, setAuthor] = useState("")
 
   const sendOpinionToServer = (item) => {
-    fetch("http://127.0.0.1:8888/opinions", {
+    fetch(`${serverURL}/opinions`, {
       method: "POST",
       body: JSON.stringify(item),
       headers: {

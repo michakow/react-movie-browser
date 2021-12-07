@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
+import { serverURL } from "./serverURL.js"
 
 export const useOpinionsData = () => {
   const [opinions, setOpinions] = useState({
     state: 'loading'
   })
+  console.log(serverURL)
 
   useEffect(() => {
     setOpinions({
@@ -12,7 +14,7 @@ export const useOpinionsData = () => {
 
     const fetchData = async () => {
       try{
-        const res = await fetch('http://localhost:8888/opinions')
+        const res = await fetch(`${serverURL}/opinions`)
         if(!res.ok) throw new Error(res.statusText)
         const data = await res.json()
         const opinions = data.opinions

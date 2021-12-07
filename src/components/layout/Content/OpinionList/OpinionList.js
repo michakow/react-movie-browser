@@ -1,13 +1,15 @@
 import { useOpinionsData } from "../../../../utils/useOpinionsData"
+import { serverURL } from "../../../../utils/serverURL"
 import OpinionForm from "../../../Forms/OpinionForm/OpinionForm"
 import ListItem from "./ListItem/ListItem"
 import { StyledContent, StyledHeading, StyledList, StyledLine} from "./OpinionList.styled"
 
 const OpinionList = () => {
   const opinions = useOpinionsData()
+  console.log(process.env.NODE_ENV)
 
   const deleteOpinion = (id, txt, author) => {
-    fetch(`http://127.0.0.1:8888/opinions/${id}`, {
+    fetch(`${serverURL}/opinions/${id}`, {
       method: "DELETE"
     })
     const deleteInfo = `${author}'s opinion has been deleted.\nOpinion: ${txt}`

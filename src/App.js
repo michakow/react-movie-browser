@@ -4,6 +4,7 @@ import { GlobalStyles } from "./theme/GlobalStyle.js"
 import { theme } from "./theme/theme.js"
 import MovieListPage from "./views/MovieListPage/MovieListPage.js"
 import OpinionsPage from "./views/OpinionsPage/OpinionsPage.js"
+import ContactPage from "./views/ContactPage/ContactPage.js"
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path='/opinions'>
             <OpinionsPage />
+          </Route>
+          <Route path='/contact'>
+            <ContactPage />
           </Route>
           <Route exact path='/'>
             <Redirect to='/movies' />

@@ -2,7 +2,7 @@ import { StyledLink } from "./ContactLink.styled.js"
 
 const ContactLink = () => {
   return (
-    <StyledLink>
+    <StyledLink to="/contact">
       Contact
     </StyledLink>
   )

@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export const StyledLink = styled.a`
+export const StyledLink = styled(Link)`
   display: block;
   margin: 0 30px;
   padding: 2px;

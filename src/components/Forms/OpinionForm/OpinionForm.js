@@ -1,7 +1,7 @@
 import uuid from "react-uuid"
 import { useState } from "react"
-import { serverURL } from "../../../utils/serverURL"
-import { StyledForm, StyledLabel, StyledTextarea, StyledInput, StyledButton, StyledSendInfo, StyledSignatureInfo, StyledSpan } from "./OpinionForm.styled"
+import { serverURL } from "../../../utils/serverURL.js"
+import { StyledForm, StyledLabel, StyledTextarea, StyledInput, StyledButton, StyledSendInfo, StyledSignatureInfo, StyledSpan } from "./OpinionForm.styled.js"
 
 const OpinionForm = ({serverState}) => {
   const [sendingState, setSendingState] = useState(false)

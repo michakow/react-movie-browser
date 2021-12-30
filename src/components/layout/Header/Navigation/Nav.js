@@ -6,17 +6,32 @@ const Nav = () => {
     {
       id: 1,
       name: 'movies',
-      pathName: '/movies'
+      pathName: '/movies',
+      active: true
     },
     {
       id: 2,
       name: 'top10',
-      pathName: '/trending'
+      pathName: '/trending',
+      active: true
     },
     {
       id: 3,
       name: 'opinions',
-      pathName: '/opinions'
+      pathName: '/opinions',
+      active: true
+    },
+    {
+      id: 4,
+      name: 'login',
+      pathName: '/login',
+      active: sessionStorage.getItem('account') ? !JSON.parse(sessionStorage.getItem('account')).logged : true
+    },
+    {
+      id: 5,
+      name: 'admin',
+      pathName: '/admin',
+      active: true
     }
   ]
 

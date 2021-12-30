@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 export const StyledItem = styled.li`
   padding: 20px;
+
+  ${(props) => props.active === false && css`
+    display: none
+  `}  
 `
 
 export const StyledLink = styled(Link)`

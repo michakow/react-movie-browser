@@ -6,6 +6,7 @@ import { StyledContent, StyledHeading, StyledList, StyledLine} from "./OpinionLi
 
 const OpinionList = () => {
   const opinions = useOpinionsData()
+  console.log(opinions)
 
   const deleteOpinion = (id, txt, author) => {
     fetch(`${serverURL}/opinions/${id}`, {
@@ -21,8 +22,14 @@ const OpinionList = () => {
 
   return (
     <StyledContent> 
-      <OpinionForm serverState={opinions.state} />
-      <StyledLine />
+      {
+        (sessionStorage.getItem('account') ? JSON.parse(sessionStorage.getItem('account')).logged : false) ? (
+          <>
+            <OpinionForm serverState={opinions.state} />
+            <StyledLine />
+          </>
+        ) : null
+      }
       {
         opinions.state === 'loading' ? (
           <StyledHeading>Loading..</StyledHeading>
@@ -39,7 +46,7 @@ const OpinionList = () => {
           <StyledList>
             {
               opinions.opinions.slice(0).reverse().map(opinion => (
-                <ListItem key={opinion.id} opinion={opinion} onDeleteOpinion={deleteOpinion} />
+                <ListItem key={opinion._id} opinion={opinion} onDeleteOpinion={deleteOpinion} />
               ))
             }
           </StyledList>

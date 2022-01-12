@@ -8,7 +8,7 @@ const ListItem = ({opinion, onDeleteOpinion}) => {
         {opinion.author}
         <StyledSpan>{opinion.date}</StyledSpan>
       </StyledParagraph>
-      <StyledDeleteButton onClick={() => onDeleteOpinion(opinion.id, opinion.text, opinion.author)} />
+      <StyledDeleteButton onClick={() => onDeleteOpinion(opinion._id, opinion.text, opinion.author)} />
     </StyledWrapper>
   )
 }

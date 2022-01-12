@@ -46,7 +46,7 @@ const LoginForm = () => {
       }
     }).then(res => res.json()).then(data => {
       if(data.code){
-        sessionStorage.setItem("account", JSON.stringify({ logged: true, name: userLogin }))
+        sessionStorage.setItem("account", JSON.stringify({ logged: true, name: userLogin, token: data.token }))
         setTimeout(() => {
           window.location.reload(true)
         }, 700)

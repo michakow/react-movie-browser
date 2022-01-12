@@ -24,13 +24,8 @@ export const StyledTextarea = styled.textarea`
   resize: vertical;
 `
 
-export const StyledInput = styled.input`
-  padding: 10px 15px;
-  width: 100%;
-  font-size: 14px;
-`
-
 export const StyledButton = styled.input`
+  margin-top: 15px;
   padding: 10px;
   color: #b6b6b6;
   font-weight: bold;
@@ -64,14 +59,4 @@ export const StyledSendInfo = styled.p`
   ${(props) => props.sendState && css`
     background-color: #afedc4;
   `} 
-`
-
-export const StyledSignatureInfo = styled.p`
-  margin-bottom: 20px;
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.textSecondary};
-`
-
-export const StyledSpan = styled.span`
-  font-weight: bold;
 `

@@ -1,19 +1,33 @@
-import uuid from "react-uuid"
 import { useState } from "react"
 import { serverURL } from "../../../utils/serverURL.js"
-import { StyledForm, StyledLabel, StyledTextarea, StyledInput, StyledButton, StyledSendInfo, StyledSignatureInfo, StyledSpan } from "./OpinionForm.styled.js"
+import { StyledForm, StyledLabel, StyledTextarea, StyledButton, StyledSendInfo } from "./OpinionForm.styled.js"
 
 const OpinionForm = ({serverState}) => {
   const [sendingState, setSendingState] = useState(false)
+  const [sendOpinion, setSendOpinion] = useState(0)
   const [opinion, setOpinion] = useState("")
-  const [author, setAuthor] = useState("")
 
   const sendOpinionToServer = (item) => {
     fetch(`${serverURL}/opinions`, {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        "Authorization": JSON.parse(sessionStorage.getItem('account')).token
+      }
+    }).then(res => res.json()).then(data => {
+      if(data.code){
+        setSendingState(true)
+        setSendOpinion(1)
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 2000)
+      }else{
+        setSendingState(true)
+        setSendOpinion(0)
+        setTimeout(() => {
+          setSendingState(false)
+        }, 2000)
       }
     })
   }
@@ -23,34 +37,20 @@ const OpinionForm = ({serverState}) => {
     const date = new Date().toISOString().split("T")[0];
 
     sendOpinionToServer({
-      id: uuid(),
       text: opinion,
       date: date,
-      author: author
+      author: JSON.parse(sessionStorage.getItem('account')).name
     })
 
-    setSendingState(true)
     setOpinion("")
-    setAuthor("")
-
-    if(serverState === "success"){
-      setTimeout(() => {
-        window.location.reload(true)
-      }, 2000)
-    } else {
-      setTimeout(() => {
-        setSendingState(false)
-      }, 2000)
-    }
-    
   }
 
   return (
     <StyledForm onSubmit={onFormSubmit}>
       {
         sendingState ? 
-        <StyledSendInfo sendState={serverState === "success"}>
-          {serverState === "success" ? "Opinion has been sent" : "Opinion has not been sent (server problem)"}
+        <StyledSendInfo sendState={serverState === "success" && sendOpinion === 1}>
+          {serverState === "success" && sendOpinion === 1 ? "Opinion has been sent" : "Opinion has not been sent (server or authorization problem)"}
         </StyledSendInfo> : null
       }
       <StyledLabel opinion>
@@ -61,16 +61,6 @@ const OpinionForm = ({serverState}) => {
           onChange={(e) => setOpinion(e.target.value)}
         />
       </StyledLabel>
-      <StyledLabel author>
-        <StyledInput
-          type="email"
-          placeholder="*your email.."
-          required={true}
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-      </StyledLabel>
-      <StyledSignatureInfo><StyledSpan>*</StyledSpan>Your email address will act as a signature for your opinion.</StyledSignatureInfo>
       <StyledButton type="submit" value="Send opinion" />
     </StyledForm>
   )

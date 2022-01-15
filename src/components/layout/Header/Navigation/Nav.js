@@ -31,7 +31,7 @@ const Nav = () => {
       id: 5,
       name: 'admin',
       pathName: '/admin',
-      active: true
+      active: false
     }
   ]
 

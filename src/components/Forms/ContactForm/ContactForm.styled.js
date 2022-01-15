@@ -9,21 +9,38 @@ export const StyledForm = styled.form`
   background-color: #e6e6e6;
   box-shadow: 0 1px 10px 0 rgba(0,0,0,0.5);
   border-radius: 15px;
+
+  @media screen and (max-width: 500px){
+    padding: 20px 20px;
+  }
 `
 
 export const StyledAuthor = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+  }
 `
 
 export const StyledLabel = styled.label`
   ${(props) => props.author && css`
     flex-basis: 49.8%;
+
+    @media screen and (max-width: 500px){
+      margin-bottom: 5px;
+      width: 100%;
+    }
   `}
 
   ${(props) => props.message && css`
     margin: 5px 0 15px;
+
+    @media screen and (max-width: 500px){
+      margin: 0px 0 15px;
+    }
   `}
 `
 

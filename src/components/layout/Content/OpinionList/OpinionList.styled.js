@@ -6,6 +6,14 @@ export const StyledContent = styled.main`
   flex-direction: column;
   padding: 30px 200px;
   background-color: ${({ theme }) => theme.colors.bgSecondary};
+
+  @media screen and (max-width: 1280px){
+    padding: 30px 100px;
+  }
+
+  @media screen and (max-width: 1024px){
+    padding: 30px 50px;
+  }
 `
 
 export const StyledHeading = styled.h2`

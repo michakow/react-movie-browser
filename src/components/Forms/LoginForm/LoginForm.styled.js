@@ -12,6 +12,19 @@ export const StyledForm = styled.form`
   background-color: #e6e6e6;
   box-shadow: 0 1px 10px 0 rgba(0,0,0,0.5);
   border-radius: 15px;
+
+  @media screen and (max-width: 1024px){
+    width: 50%;
+  }
+
+  @media screen and (max-width: 500px){
+    width: 70%;
+    padding: 60px 0px;
+  }
+
+  @media screen and (max-width: 300px){
+    width: 90%;
+  }
 `
 
 export const StyledDiv = styled.div`

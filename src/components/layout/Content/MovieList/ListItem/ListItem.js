@@ -34,7 +34,7 @@ const ListItem = ({ movie }) => {
         </StyledParagraph>
       </StyledRating>
       <StyledDetailsButton showDetails={showDetails} onClick={() => setShowDetails(true)} />
-      <StyledDetails showDetails={showDetails}>
+      <StyledDetails showDetails={showDetails} onClick={() => setShowDetails(false)}>
         <StyledDetailsHeading>{movie.title}</StyledDetailsHeading>
         <StyledDetailsParagraph>{movie.overview}</StyledDetailsParagraph>
         <StyledDetailsParagraph>{movie.release_date ? movie.release_date : null}</StyledDetailsParagraph>

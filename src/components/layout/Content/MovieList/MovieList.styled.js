@@ -4,19 +4,31 @@ export const StyledContent = styled.main`
   flex-grow: 1;
   padding: 30px 200px;
   background-color: ${({ theme }) => theme.colors.bgSecondary};
+
+  @media screen and (max-width: 1280px){
+    padding: 30px 100px;
+  }
+
+  @media screen and (max-width: 1380px){
+    padding: 30px 50px;
+  }
 `
 
 export const StyledHeading = styled.h2`
   margin-bottom: 30px;
   font-size: 26px;
   color: ${({ theme }) => theme.colors.textSecondary};
+
+  @media screen and (max-width: 720px){
+    text-align: center;
+  }
 `
 
 export const StyledList = styled.section`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  grid-gap: 40px 0;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  grid-gap: 40px;
 `
 
 export const StyledPages = styled.div`

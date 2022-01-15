@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { BiMenu } from "react-icons/bi"
 
 export const StyledHeader = styled.header`
   position: relative;
@@ -6,6 +7,10 @@ export const StyledHeader = styled.header`
   align-items: center;
   padding: 8px 50px;
   background-color: ${({theme}) => theme.colors.bgPrimary};
+
+  @media screen and (max-width: 1280px){
+    justify-content: space-between;
+  }
 `
 
 export const StyledLoginInfo = styled.div`
@@ -31,4 +36,9 @@ export const StyledLogout = styled.span`
   &:hover{
     color: black;
   }
+`
+
+export const StyledMenu = styled(BiMenu)`
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: 40px;
 `

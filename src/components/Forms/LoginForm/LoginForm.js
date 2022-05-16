@@ -1,99 +1,130 @@
-import { useState } from "react"
-import { serverURL } from "../../../utils/serverURL.js"
-import { StyledForm, StyledInput, StyledButton, StyledDiv, StyledParagraph, StyledSpan, StyledSendInfo } from "./LoginForm.styled.js"
+import { useState } from "react";
+import { serverURL } from "../../../utils/serverURL.js";
+import {
+  StyledForm,
+  StyledInput,
+  StyledButton,
+  StyledDiv,
+  StyledParagraph,
+  StyledSpan,
+  StyledSendInfo,
+} from "./LoginForm.styled.js";
 
 const LoginForm = () => {
-  const [validateState, setValidateState] = useState("")
+  const [validateState, setValidateState] = useState("");
 
-  const [login, setLogin] = useState(true)
-  const [register, setRegister] = useState(false)
+  const [login, setLogin] = useState(true);
+  const [register, setRegister] = useState(false);
 
-  const [userLogin, setUserLogin] = useState("")
-  const [userPassword, setUserPassword] = useState("")
-  const [userRePassword, setUserRePassword] = useState("")
+  const [userLogin, setUserLogin] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userRePassword, setUserRePassword] = useState("");
 
   const createNewUser = (data) => {
     fetch(`${serverURL}/users/create`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-type": "application/json"
-      }
-    }).then(res => res.json()).then(data => {
-      if(data.code){
-        setValidateState("created")
-        setUserLogin("")
-        setUserPassword("")
-        setUserRePassword("")
-        setTimeout(() => {
-          setValidateState("")
-        }, 2000)
-      }else{
-        setValidateState("nocreated")
-        setTimeout(() => {
-          setValidateState("")
-        }, 2000)
-      }
+        "Content-type": "application/json",
+      },
     })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code) {
+          setValidateState("created");
+          setUserLogin("");
+          setUserEmail("");
+          setUserPassword("");
+          setUserRePassword("");
+          setTimeout(() => {
+            setValidateState("");
+          }, 2000);
+        } else {
+          setValidateState("nocreated");
+          setTimeout(() => {
+            setValidateState("");
+          }, 2000);
+        }
+      });
+  };
 
   const loginToAccount = (data) => {
     fetch(`${serverURL}/users/auth`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-type": "application/json"
-      }
-    }).then(res => res.json()).then(data => {
-      if(data.code){
-        sessionStorage.setItem("account", JSON.stringify({ logged: true, name: userLogin, token: data.token }))
-        setTimeout(() => {
-          window.location.reload(true)
-        }, 700)
-      }else{
-        sessionStorage.setItem("account", JSON.stringify({ logged: false }))
-        setValidateState("badlogged")
-        setTimeout(() => {
-          setValidateState("")
-        }, 2000)
-      }
+        "Content-type": "application/json",
+      },
     })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code) {
+          sessionStorage.setItem(
+            "account",
+            JSON.stringify({ logged: true, name: userLogin, token: data.token })
+          );
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 700);
+        } else {
+          sessionStorage.setItem("account", JSON.stringify({ logged: false }));
+          setValidateState("badlogged");
+          setTimeout(() => {
+            setValidateState("");
+          }, 2000);
+        }
+      });
+  };
 
   const onFormSubmit = (event) => {
-    event.preventDefault()
-    const date = new Date().toISOString().split("T")[0]
+    event.preventDefault();
+    const date = new Date().toISOString().split("T")[0];
 
-    login ? loginToAccount({
-      name: userLogin,
-      password: userPassword
-    }) : createNewUser({
-      name: userLogin,
-      password: userPassword,
-      created: date
-    })
-  }
+    login
+      ? loginToAccount({
+          name: userLogin,
+          password: userPassword,
+        })
+      : createNewUser({
+          name: userLogin,
+          password: userPassword,
+          email: userEmail,
+          created: date,
+        });
+  };
 
   return (
     <StyledForm onSubmit={onFormSubmit}>
-      {
-        validateState ? 
+      {validateState ? (
         <StyledSendInfo sendState={validateState === "created"}>
-          {validateState === "badlogged" ? "Bad login or password" : validateState === "created" ? "Account created" : "Accout with this login already exist"}
-        </StyledSendInfo> : null
-      }
+          {validateState === "badlogged"
+            ? "Bad login or password"
+            : validateState === "created"
+            ? "Account created"
+            : "Accout with this login already exist"}
+        </StyledSendInfo>
+      ) : null}
       <StyledDiv>
         <StyledParagraph loginP activeL={login}>
-          <StyledSpan onClick={() => {
-            setLogin(true)
-            setRegister(false)
-          }}>Login</StyledSpan>
+          <StyledSpan
+            onClick={() => {
+              setLogin(true);
+              setRegister(false);
+            }}
+          >
+            Login
+          </StyledSpan>
         </StyledParagraph>
         <StyledParagraph registerP activeR={register}>
-          <StyledSpan onClick={() => {
-            setLogin(false)
-            setRegister(true)
-          }}>Register</StyledSpan>
+          <StyledSpan
+            onClick={() => {
+              setLogin(false);
+              setRegister(true);
+            }}
+          >
+            Register
+          </StyledSpan>
         </StyledParagraph>
       </StyledDiv>
       <StyledInput
@@ -105,6 +136,15 @@ const LoginForm = () => {
         value={userLogin}
         onChange={(e) => setUserLogin(e.target.value)}
       />
+      {register ? (
+        <StyledInput
+          type="email"
+          placeholder="email"
+          required={true}
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
+      ) : null}
       <StyledInput
         type="password"
         placeholder="password"
@@ -114,9 +154,8 @@ const LoginForm = () => {
         value={userPassword}
         onChange={(e) => setUserPassword(e.target.value)}
       />
-      {
-        register ? (
-          <StyledInput
+      {register ? (
+        <StyledInput
           type="password"
           placeholder="repeat password"
           required={true}
@@ -125,11 +164,10 @@ const LoginForm = () => {
           value={userRePassword}
           onChange={(e) => setUserRePassword(e.target.value)}
         />
-        ) : null
-      }
+      ) : null}
       <StyledButton type="submit" value={register ? "Register" : "Login"} />
     </StyledForm>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

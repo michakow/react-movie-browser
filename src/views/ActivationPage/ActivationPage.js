@@ -9,7 +9,7 @@ import { serverURL } from "../../utils/serverURL";
 import { useEffect, useState } from "react";
 
 const ActivationPage = () => {
-  const { id } = useParams();
+  const { userName } = useParams();
   const [activationState, setActivationState] = useState("loading");
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const ActivationPage = () => {
 
     fetch(`${serverURL}/users/verify`, {
       method: "POST",
-      body: JSON.stringify({ userID: id }),
+      body: JSON.stringify({ userName: userName }),
       headers: {
         "Content-type": "application/json",
       },
@@ -31,7 +31,7 @@ const ActivationPage = () => {
         console.log("Error:", error);
         setActivationState("serverError");
       });
-  }, [id]);
+  }, [userName]);
 
   return (
     <StyledDiv>

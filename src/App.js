@@ -41,7 +41,7 @@ function App() {
           <Route path="/admin">
             {true ? <AdminPanelPage /> : <Redirect to="/movies" />}
           </Route>
-          <Route path="/verify/:userName">
+          <Route path="/verify/:id">
             <ActivationPage />
           </Route>
           <Route exact path="/">
